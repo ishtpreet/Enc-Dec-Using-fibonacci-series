@@ -21,10 +21,6 @@ struct originalString
 	unsigned long int FibonacciBinary[100];
 }S;
 
-struct Binary
-{
-	double Binary[100];
-}B;
 
 //Function4  Decimal to Fibonacci Format (Step 5)
 
@@ -99,7 +95,7 @@ void decimaltofibonacci()
 		}
 		FILE *fp;
 		fp=fopen("abc.txt","w");     
-		for(k=0;k<8;k++) 
+		for(k=7;k>0;k--) 
 		{
 			fprintf(fp,"%d",final[k]);
 		}	
@@ -111,6 +107,7 @@ void decimaltofibonacci()
 		fclose(fp);
 		//printf("\n%s", Finall);
 		S.FibonacciBinary[j] = strtol(Finall, &eptr, 2);
+		S.FibonacciBinary[j] = S.FibonacciBinary[j] << 1;
 		printf("%lu ", S.FibonacciBinary[j]);
 	}
 	printf("\n");

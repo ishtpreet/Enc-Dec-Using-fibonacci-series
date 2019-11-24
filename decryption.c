@@ -5,6 +5,20 @@
 int Fibonacci[30]; //Array with first 30 fibonacci numbers
 int Arr[15];	   //Storing Indexes of Fibonacci numbers
 
+struct EncryptedString
+{
+	int finalCode[100];
+	int length;
+	char String[100];
+	int Ascii[100];
+	unsigned long int Binary[100];
+	int XORDecimal[100];
+	unsigned long int FibonacciBinary[100];
+	unsigned long int XorBinary[100];
+}S;
+
+char keyword[1];
+
 void fibonacci()
 {
 	Fibonacci[0] = 0;
@@ -60,108 +74,120 @@ int og_binarycodetodecimal(int D1[])
 
 //Function1 to convert final code decimal to binary fibonacci format
 
-int *decimaltobinary(int n)
+void decToBinary() 
+{ 
+	int i;
+	int j,k;
+	int dn,n;
+	int binno;
+	for(k=0; k<S.length; k++)
+	{
+		i = 1;
+		binno = 0;
+		n = S.finalCode[k];
+		dn = n;
+		for(j=n;j>0;j=j/2)
+		{
+			binno=binno+(n%2)*i;
+			i=i*10;
+			n=n/2;
+		}
+		S.Binary[k] = (long int)binno;
+		printf("\n%lu", S.Binary[k]);
+	}
+}
+
+void Xor()
 {
-	static int a[8];
-	int i = 0, c = 0;
-	while (n > 0)
+	int i,j, xor_code;
+	for(j=0; j< S.length; j++)
 	{
-		if (n % 2 == 0)
-		{
-			a[i] = 0;
-			i++;
-		}
-		else
-		{
-			a[i] = 1;
-			i++;
-		}
-		n = n / 2;
-		c++;
-	}
-	printf("\n");
-	for (i = c; i < 8; i++)
+	xor_code = 0;
+	for (i = 0; i < 8; i++)
 	{
-		a[i] = 0;
+		if (S.[i] == 1)
+		{
+			xor_code = xor_code + Fibonacci[i + 1];
+		}
 	}
-	return a;
+	S.XorBinary[j] = xor_code;
+	printf("Xor code = %d\n", xor_code);
+	}
 }
 
 int main()
 {
-	int final_code;
-	char keyword[1];
-	printf("Enter Final code to decrypt\n");
-	scanf("%d", &final_code);
-
+	int i;
 	printf("Enter Keyword letter\n");
 	scanf("%s", keyword);
+	printf("\nEnter number of string");
+	scanf("%d",&S.length);
+	for(i=0;i<S.length;i++)
+	{
+		printf("\nEnter %d Final Code\t",i+1);
+		scanf("%d", &S.finalCode[i]);
+		//printf("\n%d",S.finalCode[i]);
+	}	
+
+	decToBinary();
 	//printf("%s",original);
 	int as1 = (int)keyword[0];
 	//int as2=(int)keyword[0];
 
-	int i;
-	int *bin1 = decimaltobinary(final_code);
-	int arr1[8];
-	printf("Fibonacci Binary code = ");
-	for (i = 7; i >= 0; i--)
-	{
-		arr1[i] = bin1[i];
-		printf("%d ", bin1[i]);
-	}
-	printf("\n");
+	
+	 printf("\n");
+	 fibonacci();
 
-	fibonacci();
+	// int xor_code = 0;
+	// for (i = 0; i < 8; i++)
+	// {
+	// 	if (arr1[i] == 1)
+	// 	{
+	// 		xor_code = xor_code + Fibonacci[i + 1];
+	// 	}
+	// 	else
+	// 	{
+	// 	}
+	// }
+	// printf("Xor code = %d\n", xor_code);
 
-	int xor_code = 0;
-	for (i = 0; i < 8; i++)
-	{
-		if (arr1[i] == 1)
-		{
-			xor_code = xor_code + Fibonacci[i + 1];
-		}
-		else
-		{
-		}
-	}
-	printf("Xor code = %d\n", xor_code);
+	// int *bin2 = decimaltobinary(xor_code);
+	// int arr2[8];
+	// printf("XOR Binary code of plain letter and keyword letter = ");
+	// for (i = 7; i >= 0; i--)
+	// {
+	// 	arr2[i] = bin2[i];
+	// 	printf("%d ", bin2[i]);
+	// }
+	// printf("\n");
 
-	int *bin2 = decimaltobinary(xor_code);
-	int arr2[8];
-	printf("XOR Binary code of plain letter and keyword letter = ");
-	for (i = 7; i >= 0; i--)
-	{
-		arr2[i] = bin2[i];
-		printf("%d ", bin2[i]);
-	}
-	printf("\n");
+	// printf("\n");
+	// printf("ASCII code of keyword letter = %d\n", as1);
 
-	printf("\n");
-	printf("ASCII code of keyword letter = %d\n", as1);
+	// int *bin3 = decimaltobinary(as1);
+	// int arr3[8];
+	// printf("XOR Binary code of plain letter and keyword letter = ");
+	// for (i = 7; i >= 0; i--)
+	// {
+	// 	arr3[i] = bin3[i];
+	// 	printf("%d ", bin3[i]);
+	// }
+	// printf("\n");
 
-	int *bin3 = decimaltobinary(as1);
-	int arr3[8];
-	printf("XOR Binary code of plain letter and keyword letter = ");
-	for (i = 7; i >= 0; i--)
-	{
-		arr3[i] = bin3[i];
-		printf("%d ", bin3[i]);
-	}
-	printf("\n");
+	// printf("XOR of plain letter and keyword letter = ");
+	// int arr4[8];
+	// int *og = binaryXOR(arr2, arr3);
+	// for (i = 7; i >= 0; i--)
+	// {
+	// 	arr4[i] = og[i];
+	// 	printf("%d ", og[i]);
+	// }
+	// printf("\nASCII code of plain letter = ");
 
-	printf("XOR of plain letter and keyword letter = ");
-	int arr4[8];
-	int *og = binaryXOR(arr2, arr3);
-	for (i = 7; i >= 0; i--)
-	{
-		arr4[i] = og[i];
-		printf("%d ", og[i]);
-	}
-	printf("\nASCII code of plain letter = ");
+	// int as2 = og_binarycodetodecimal(arr4);
+	// printf("%d\n", as2);
 
-	int as2 = og_binarycodetodecimal(arr4);
-	printf("%d\n", as2);
-
-	char plain = (char)as2;
-	printf("Plain letter : %c\n", plain);
+	// char plain = (char)as2;
+	// printf("Plain letter : %c\n", plain);
+	return 0;
 }
