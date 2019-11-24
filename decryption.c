@@ -48,37 +48,8 @@ void fibonacci()
 	printf("\n");
 }
 
-int *binaryXOR(int A1[], int B1[])
-{
-	int i;
-	static int C1[8];
-	for (i = 0; i < 8; i++)
-	{
-		if (A1[i] == B1[i])
-		{
-			C1[i] = 0;
-			;
-		}
-		else
-		{
-			C1[i] = 1;
-		}
-	}
 
-	//printf("\n");
-	return C1;
-}
 
-int og_binarycodetodecimal(int D1[])
-{
-	int i;
-	float decimal = 0.0;
-	for (i = 0; i < 8; i++)
-	{
-		decimal = decimal + D1[i] * pow(2.0, i);
-	}
-	return decimal;
-}
 
 //Function1 to convert final code decimal to binary fibonacci format
 
@@ -240,7 +211,7 @@ int * ConvertDeciToBinary2(int val)
 int *myxor(int a1[], int a2[])
 {
   int i,j;
-  int PlainBinary[8];
+  static int PlainBinary[8];
   
   for(i=0;i<8;i++)
   {
