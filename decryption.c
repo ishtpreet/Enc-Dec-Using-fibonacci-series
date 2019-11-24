@@ -244,12 +244,12 @@ int main()
 	int i;
 	printf("Enter Keyword letter\n");
 	scanf("%s", keyword);
-	printf("\nEnter number of string");
+	printf("\nEnter number of string\n");
 	scanf("%d",&S.length);
   printf("%d",S.length);
 	for(i=0;i<S.length;i++)
 	{
-		printf("\nEnter %d Final Code\t",i+1);
+		printf("\nEnter %d Final Code\t\n",i+1);
 		scanf("%d", &S.finalCode[i]);
 		//printf("\n%d",S.finalCode[i]);
 	}	
@@ -286,6 +286,6 @@ int main()
   printf("\nHola %d", bin4);
   char plain = (char)bin4;
   printf("\nOriginal %c", plain);
-
+  printf("\n");
 	return 0;
 }
